@@ -238,7 +238,7 @@ export default function GokPage() {
             )}
           </div>
           ) : (
-          <div className="card p-5 text-right opacity-60 h-fit sticky top-20" style={{ borderColor: "var(--accent)", boxShadow: "5px 5px 0 0 var(--accent)" }}>
+          <div className="card p-5 text-left opacity-60 h-fit sticky top-20" style={{ borderColor: "var(--accent)", boxShadow: "5px 5px 0 0 var(--accent)" }}>
             <p>Kies een markt om je weddenschap te plaatsen</p>
           </div>
           )}
