@@ -1,0 +1,7 @@
+import { NextResponse } from "next/server";
+import { getConfig, saveConfig } from "@/lib/store";
+export async function GET() { return NextResponse.json(getConfig()); }
+export async function POST(req: Request) {
+  const body = await req.json();
+  return NextResponse.json(saveConfig(body));
+}

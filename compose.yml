@@ -1,0 +1,31 @@
+# Production compose for tiny-mr-schijf.optidigi.nl on the optidigi VPS.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: baby-bart:latest
+    container_name: baby-bart
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.baby-bart.rule=Host(`tiny-mr-schijf.optidigi.nl`)"
+      - "traefik.http.routers.baby-bart.entrypoints=websecure"
+      - "traefik.http.routers.baby-bart.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.baby-bart.service=baby-bart"
+      - "traefik.http.services.baby-bart.loadbalancer.server.port=3000"
+      - "traefik.http.routers.baby-bart.middlewares=hsts@docker"
+    networks:
+      - proxy
+    volumes:
+      - ./data:/app/data
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+
+networks:
+  proxy:
+    external: true
+    name: proxy

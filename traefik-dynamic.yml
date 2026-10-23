@@ -1,0 +1,14 @@
+http:
+  routers:
+    baby-bart:
+      rule: "Host(`tiny-mr-schijf.optidigi.nl`)"
+      entryPoints:
+        - websecure
+      service: baby-bart
+      tls:
+        certResolver: cloudflare
+  services:
+    baby-bart:
+      loadBalancer:
+        servers:
+          - url: "http://localhost:3000"

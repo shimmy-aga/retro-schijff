@@ -1,67 +1,125 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useState } from "react";
+import Nav from "@/components/Nav";
+import Particles from "@/components/Particles";
+import Countdown from "@/components/Countdown";
+import { api, type Config, type Bet, type GameScore } from "@/lib/data";
+import { MARKET_LABEL } from "@/lib/odds";
+import confetti from "canvas-confetti";
+import { Dices, Dumbbell, Zap, Coins, Trophy, Target } from "lucide-react";
 
 export default function Home() {
+  const [config, setConfig] = useState<Config | null>(null);
+  const [bets, setBets] = useState<Bet[]>([]);
+  const [scores, setScores] = useState<GameScore[]>([]);
+
+  useEffect(() => {
+    api.getConfig().then(setConfig);
+    api.getBets().then(setBets);
+    api.getScores().then((s) => setScores(s.sort((a, b) => b.score - a.score).slice(0, 5)));
+  }, []);
+
+  useEffect(() => {
+    let buf = "";
+    const handler = (e: KeyboardEvent) => {
+      buf = (buf + e.key.toLowerCase()).slice(-10);
+      if (buf === "tinyfemboy") {
+        document.body.classList.toggle("fatass-mode");
+        confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 } });
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
+  const flipBorn = async () => {
+    if (!config) return;
+    const updated = await api.saveConfig({ born: !config.born });
+    setConfig(updated);
+    if (updated.born) confetti({ particleCount: 400, spread: 160, origin: { y: 0.5 } });
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="relative min-h-screen">
+      <Particles />
+      <Nav />
+      <main className="relative z-10 max-w-6xl mx-auto px-4 py-14">
+        <section className="text-center mb-16">
+          <h1 className="font-display text-5xl md:text-7xl font-bold gradient-text mb-6">
+            Baby komt eraan!
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg opacity-80 mb-8">
+            Een kleine Schijff op komst 👶
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          <Countdown />
+        </section>
+
+        <section className="grid sm:grid-cols-2 gap-6 mb-12">
+          <div className="card p-6">
+            <div className="font-display text-2xl font-bold mb-2 flex items-center gap-2"><Dices className="text-accent" size={24} /> <span className="gradient-text">Gokken</span></div>
+            <div className="text-sm opacity-70 mb-4">Wed op de geboorte — odds, wagers, payouts</div>
+            <a href="/gok" className="btn w-full">Plaats weddenschap</a>
+          </div>
+          <div className="card p-6">
+            <div className="font-display text-2xl font-bold mb-2 flex items-center gap-2"><Dumbbell className="text-accent" size={24} /> <span className="gradient-text">Deadlift</span></div>
+            <div className="text-sm opacity-70 mb-4">Mini-game — timing, combo's, Hall of Gains</div>
+            <a href="/deadlift" className="btn btn-secondary w-full">Speel mini-game</a>
+          </div>
+          <div className="card p-6">
+            <div className="font-display text-2xl font-bold mb-2 flex items-center gap-2"><Zap className="text-accent" size={24} /> <span className="gradient-text">Evolutie</span></div>
+            <div className="text-sm opacity-70 mb-4">Pokémon rhythm race — tap op de beat, evolueer</div>
+            <a href="/evolutie" className="btn btn-secondary w-full">Start race</a>
+          </div>
+          <div className="card p-6">
+            <div className="font-display text-2xl font-bold mb-2 flex items-center gap-2"><Target className="text-accent" size={24} /> <span className="gradient-text">Shooter</span></div>
+            <div className="text-sm opacity-70 mb-4">Verdedig de baby — schiet vijanden, pak power-ups</div>
+            <a href="/shooter" className="btn w-full">Start shooter</a>
+          </div>
+        </section>
+
+        <section className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="card p-6">
+            <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"><Coins className="text-foreground" size={24} /> Weddenschappen</h2>
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+               {bets.slice().reverse().map((b) => (
+                <div key={b.id} className="flex justify-between items-center p-3 border-2 border-border bg-accent2/10">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold">{b.guestName}</span>
+                    <span className="text-xs opacity-70">{MARKET_LABEL[b.market] ?? b.market}</span>
+                  </div>
+                  <div className="text-right">
+                    {config?.resolved ? (
+                      <span className={`font-retro text-xs ${b.won ? "text-green-500" : "text-red-500"}`}>
+                        {b.won ? "✓" : "✗"} {b.outcome} · €{b.payout ?? 0}
+                      </span>
+                    ) : (
+                      <span className="font-retro text-xs">
+                        {b.outcome} · <span className="text-accent">€{b.wager} inzet</span>
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {bets.length === 0 && <p className="text-sm opacity-60">Nog geen bets.</p>}
+            </div>
+          </div>
+
+          <div className="card p-6">
+            <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"><Trophy className="text-foreground" size={24} /> Minigame Scoreboard</h2>
+            <div className="space-y-2">
+              {scores.map((s, i) => (
+                <div key={s.id} className="flex justify-between items-center p-2 border-2 border-border ">
+                  <span className="text-sm"><b>#{i+1}</b> {s.playerName} <span className="text-xs opacity-60">({s.game === "evolution" ? "Evolutie" : "Deadlift"})</span></span>
+                  <span className="font-retro text-xs text-foreground">{s.score}</span>
+                </div>
+              ))}
+              {scores.length === 0 && <p className="text-sm opacity-60">Nog geen scores.</p>}
+            </div>
+          </div>
+        </section>
+
+        <div className="mt-8 text-center text-xs opacity-40">
+          Tip: typ "tinyfemboy" voor een verrassing
         </div>
       </main>
     </div>
