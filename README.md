@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# baby-bart 👶
 
-## Getting Started
+A retro-styled Next.js app for the arrival of baby Schijff (due 28 Jan 2027). Features a live countdown, pari-mutuel betting on birth details, mini-games, wishes, cravings, voting, and a scoreboard.
 
-First, run the development server:
+## Features
+
+- **Countdown** to the due date
+- **Betting (Gokken)** — pari-mutuel pool betting on birth date, weight, length, name, hair/eye color
+- **Mini-games** — Deadlift, Evolutie (Pokémon rhythm race), Shooter
+- **Wishes & cravings** — guestbook-style messages and craving counter
+- **Voting** — meals & Pokémon
+- **Scoreboard** — mini-game high scores
+- **Admin panel** — resolve bets, manage config
+
+## Tech stack
+
+- Next.js 16 (App Router) · React 19 · TypeScript
+- Tailwind CSS 4 · next-themes
+- File-based JSON store (`data/db.json`)
+- Docker + Traefik (production)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Lint |
 
-## Learn More
+## Tests
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx tsx --test tests/odds.test.ts
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Production runs via Docker Compose on the VPS (`tiny-mr-schijf.optidigi.nl`):
 
-## Deploy on Vercel
+```bash
+docker compose build && docker compose up -d
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Data is persisted in `./data` (mounted as a volume).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+Private — © Schijff family.
