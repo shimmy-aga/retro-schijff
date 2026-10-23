@@ -411,7 +411,7 @@ export default function ShooterPage() {
           </div>
         )}
 
-        <div className="card p-6 mt-6">
+        <div className="card p-6 mt-6 text-left">
           <div className="flex justify-between items-center mb-3">
             <h2 className="font-display text-2xl font-bold">🏆 Hall of Defenders</h2>
           </div>
@@ -423,7 +423,7 @@ export default function ShooterPage() {
               <b className="font-retro gradient-text">{s.score}</b>
             </div>
           ))}
-          {best.length === 0 && <p className="opacity-60 text-sm text-right">Nog geen defenders.</p>}
+          {best.length === 0 && <p className="opacity-60 text-sm text-left">Nog geen defenders.</p>}
         </div>
       </main>
     </div>

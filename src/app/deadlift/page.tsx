@@ -227,7 +227,7 @@ export default function SpelPage() {
               <b className="font-retro gradient-text">{s.score}</b>
             </div>
           ))}
-          {best.length === 0 && <p className="opacity-60 text-sm text-right">Nog geen lifters.</p>}
+          {best.length === 0 && <p className="opacity-60 text-sm text-left">Nog geen lifters.</p>}
           {best.length > 0 && (
             <div className="mt-3 text-xs opacity-60">Te verslaan: {pr} (van {best[0].playerName})</div>
           )}

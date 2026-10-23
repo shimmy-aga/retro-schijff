@@ -367,7 +367,7 @@ export default function EvolutiePage() {
           )}
         </div>
 
-        <div className="card p-6">
+        <div className="card p-6 text-left">
           <div className="flex justify-between items-center mb-3">
             <h2 className="font-display text-2xl font-bold">🏆 Hall of Evolution</h2>
           </div>
@@ -379,15 +379,15 @@ export default function EvolutiePage() {
               <b className="font-retro gradient-text">{s.score} pts</b>
             </div>
           ))}
-          {best.length === 0 && <p className="opacity-60 text-sm text-right">Nog geen evoluties.</p>}
+          {best.length === 0 && <p className="opacity-60 text-sm text-left">Nog geen evoluties.</p>}
         </div>
 
         {/* Pokemon Card Collection */}
-        <div className="card p-6 mt-6">
+        <div className="card p-6 mt-6 text-left">
           <h2 className="font-display text-2xl font-bold mb-4">🃏 Pokémon Kaarten</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {best.filter((s) => s.pokemon).map((s) => (
-              <div key={s.id} className="card p-3 text-right">
+              <div key={s.id} className="card p-3 text-left">
                 {s.pokemonId && (
                   <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${s.pokemonId}.png`} alt={s.pokemon} className="w-20 h-20 mx-auto" style={{ imageRendering: "pixelated" }} />
                 )}
@@ -397,7 +397,7 @@ export default function EvolutiePage() {
               </div>
             ))}
             {best.filter((s) => s.pokemon).length === 0 && (
-              <p className="opacity-60 text-sm col-span-full text-right">Nog geen kaarten.</p>
+              <p className="opacity-60 text-sm col-span-full text-left">Nog geen kaarten.</p>
             )}
           </div>
         </div>
