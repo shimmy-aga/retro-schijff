@@ -100,7 +100,7 @@ export default function Home() {
                   </div>
                 </div>
               ))}
-              {bets.length === 0 && <p className="text-sm opacity-60 text-right">Nog geen bets.</p>}
+              {bets.length === 0 && <p className="text-sm opacity-60 text-left">Nog geen bets.</p>}
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export default function Home() {
                   <span className="font-retro text-xs text-foreground">{s.score}</span>
                 </div>
               ))}
-              {scores.length === 0 && <p className="text-sm opacity-60 text-right">Nog geen scores.</p>}
+              {scores.length === 0 && <p className="text-sm opacity-60 text-left">Nog geen scores.</p>}
             </div>
           </div>
         </section>
