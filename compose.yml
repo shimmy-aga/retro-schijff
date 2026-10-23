@@ -4,18 +4,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: baby-bart:latest
-    container_name: baby-bart
+    image: retro-schijff:latest
+    container_name: retro-schijff
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.baby-bart.rule=Host(`tiny-mr-schijf.optidigi.nl`)"
-      - "traefik.http.routers.baby-bart.entrypoints=websecure"
-      - "traefik.http.routers.baby-bart.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.baby-bart.service=baby-bart"
-      - "traefik.http.services.baby-bart.loadbalancer.server.port=3000"
-      - "traefik.http.routers.baby-bart.middlewares=hsts@docker"
+      - "traefik.http.routers.retro-schijff.rule=Host(`tiny-mr-schijf.optidigi.nl`)"
+      - "traefik.http.routers.retro-schijff.entrypoints=websecure"
+      - "traefik.http.routers.retro-schijff.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.retro-schijff.service=retro-schijff"
+      - "traefik.http.services.retro-schijff.loadbalancer.server.port=3000"
+      - "traefik.http.routers.retro-schijff.middlewares=hsts@docker"
     networks:
       - proxy
     volumes:
