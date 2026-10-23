@@ -117,9 +117,9 @@ export default function GokPage() {
         <div className="card p-3 mb-3 opacity-70 text-xs font-retro">2. Voorspel de uitkomst</div>
         <div className="card p-3 mb-8 opacity-70 text-xs font-retro">3. Kies inzet en plaats bet</div>
 
-        <div className="grid lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid lg:grid-cols-3 gap-x-4 gap-y-12 mb-12">
           {/* Markets */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-10">
             <div className="card p-5">
               <h2 className="font-display text-xl font-bold mb-3">Markten &amp; live odds</h2>
               <p className="text-xs opacity-60 mb-3">Odds veranderen naarmate meer mensen inzetten.</p>
@@ -193,7 +193,7 @@ export default function GokPage() {
 
           {/* Bet slip / placeholder */}
           {marketKey ? (
-          <div className="card p-5 h-fit sticky top-20">
+          <div className="card p-5 h-fit sticky top-20" style={{ borderColor: "var(--accent)", boxShadow: "5px 5px 0 0 var(--accent)" }}>
             <h2 className="font-retro text-lg mb-3">Bet Slip</h2>
             <div className="text-xs opacity-70 mb-1">Markt</div>
             <div className="font-bold mb-2">{market?.label}</div>
@@ -238,7 +238,7 @@ export default function GokPage() {
             )}
           </div>
           ) : (
-          <div className="card p-5 text-center opacity-60 h-fit sticky top-20">
+          <div className="card p-5 text-right opacity-60 h-fit sticky top-20" style={{ borderColor: "var(--accent)", boxShadow: "5px 5px 0 0 var(--accent)" }}>
             <p>Kies een markt om je weddenschap te plaatsen</p>
           </div>
           )}

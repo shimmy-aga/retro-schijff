@@ -414,7 +414,6 @@ export default function ShooterPage() {
         <div className="card p-6 mt-6">
           <div className="flex justify-between items-center mb-3">
             <h2 className="font-display text-2xl font-bold">🏆 Hall of Defenders</h2>
-            <span className="text-xs opacity-60">live</span>
           </div>
           {best.map((s, i) => (
             <div key={s.id} className={`flex justify-between items-center p-2 border-b-2 border-border ${i === 0 ? "bg-accent2/30" : ""}`}>
@@ -424,7 +423,7 @@ export default function ShooterPage() {
               <b className="font-retro gradient-text">{s.score}</b>
             </div>
           ))}
-          {best.length === 0 && <p className="opacity-60 text-sm">Nog geen defenders. Wees de eerste!</p>}
+          {best.length === 0 && <p className="opacity-60 text-sm">Nog geen defenders.</p>}
         </div>
       </main>
     </div>

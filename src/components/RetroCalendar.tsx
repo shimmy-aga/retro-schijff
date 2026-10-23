@@ -59,7 +59,7 @@ export default function RetroCalendar({ value, onChange, min, placeholder = "Kie
         <Calendar size={16} className="shrink-0 ml-2 opacity-70" />
       </button>
       {open && (
-        <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-card border-4 border-border shadow-[5px_5px_0_0_var(--accent)] p-2 dropdown-in">
+        <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-card dark:bg-[#3a2a1f] border-4 border-border shadow-[5px_5px_0_0_var(--accent)] p-2 dropdown-in">
           <div className="absolute inset-0 bg-accent/10 pointer-events-none" />
           <div className="flex items-center justify-between mb-2">
             <button type="button" onClick={() => setView(new Date(year, month - 1, 1))} className="px-2 py-2 min-h-[44px] font-retro text-xs hover:bg-accent2">◀</button>

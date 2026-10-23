@@ -325,7 +325,6 @@ export default function EvolutiePage() {
               style={{ left: `${beatPos}%`, transform: "translateX(-50%)" }}
             />
           </div>
-          <p className="text-xs opacity-60 mb-4">Tap wanneer de indicator in de TAP ZONE (rechts) is</p>
 
           {/* Overall progress */}
           <div className="mb-4">
@@ -371,7 +370,6 @@ export default function EvolutiePage() {
         <div className="card p-6">
           <div className="flex justify-between items-center mb-3">
             <h2 className="font-display text-2xl font-bold">🏆 Hall of Evolution</h2>
-            <span className="text-xs opacity-60">snelste eerst</span>
           </div>
           {best.map((s, i) => (
             <div key={s.id} className={`flex justify-between items-center p-2 border-b-2 border-border ${i === 0 ? "bg-accent2/30" : ""}`}>
@@ -381,7 +379,7 @@ export default function EvolutiePage() {
               <b className="font-retro gradient-text">{s.score} pts</b>
             </div>
           ))}
-          {best.length === 0 && <p className="opacity-60 text-sm">Nog geen evoluties. Wees de eerste!</p>}
+          {best.length === 0 && <p className="opacity-60 text-sm">Nog geen evoluties.</p>}
         </div>
 
         {/* Pokemon Card Collection */}
@@ -389,7 +387,7 @@ export default function EvolutiePage() {
           <h2 className="font-display text-2xl font-bold mb-4">🃏 Pokémon Kaarten</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {best.filter((s) => s.pokemon).map((s) => (
-              <div key={s.id} className="card p-3 text-center">
+              <div key={s.id} className="card p-3 text-right">
                 {s.pokemonId && (
                   <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${s.pokemonId}.png`} alt={s.pokemon} className="w-20 h-20 mx-auto" style={{ imageRendering: "pixelated" }} />
                 )}
@@ -399,7 +397,7 @@ export default function EvolutiePage() {
               </div>
             ))}
             {best.filter((s) => s.pokemon).length === 0 && (
-              <p className="opacity-60 text-sm col-span-full">Nog geen kaarten. Evolueer een Pokémon!</p>
+              <p className="opacity-60 text-sm col-span-full">Nog geen kaarten.</p>
             )}
           </div>
         </div>

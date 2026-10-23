@@ -40,7 +40,7 @@ export default function RetroSelect({ value, onChange, options, placeholder = "K
         </span>
       </button>
       {open && (
-        <div className="absolute z-50 left-0 right-0 top-full mt-1 max-h-56 overflow-y-auto bg-card border-4 border-border shadow-[5px_5px_0_0_var(--accent)] dropdown-in">
+        <div className="absolute z-50 left-0 right-0 top-full mt-1 max-h-56 overflow-y-auto bg-card dark:bg-[#3a2a1f] border-4 border-border shadow-[5px_5px_0_0_var(--accent)] dropdown-in">
   <div className="absolute inset-0 bg-accent/10 pointer-events-none" />
           {options.map((o) => (
             <button
