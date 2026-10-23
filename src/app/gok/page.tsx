@@ -269,7 +269,7 @@ export default function GokPage() {
                 </div>
               </div>
             ))}
-            {bets.length === 0 && <p className="text-sm opacity-60">Nog geen bets.</p>}
+            {bets.length === 0 && <p className="text-sm opacity-60 text-right">Nog geen bets.</p>}
           </div>
         </div>
       </main>

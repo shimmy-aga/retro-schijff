@@ -423,7 +423,7 @@ export default function ShooterPage() {
               <b className="font-retro gradient-text">{s.score}</b>
             </div>
           ))}
-          {best.length === 0 && <p className="opacity-60 text-sm">Nog geen defenders.</p>}
+          {best.length === 0 && <p className="opacity-60 text-sm text-right">Nog geen defenders.</p>}
         </div>
       </main>
     </div>

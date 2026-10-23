@@ -379,7 +379,7 @@ export default function EvolutiePage() {
               <b className="font-retro gradient-text">{s.score} pts</b>
             </div>
           ))}
-          {best.length === 0 && <p className="opacity-60 text-sm">Nog geen evoluties.</p>}
+          {best.length === 0 && <p className="opacity-60 text-sm text-right">Nog geen evoluties.</p>}
         </div>
 
         {/* Pokemon Card Collection */}
@@ -397,7 +397,7 @@ export default function EvolutiePage() {
               </div>
             ))}
             {best.filter((s) => s.pokemon).length === 0 && (
-              <p className="opacity-60 text-sm col-span-full">Nog geen kaarten.</p>
+              <p className="opacity-60 text-sm col-span-full text-right">Nog geen kaarten.</p>
             )}
           </div>
         </div>
