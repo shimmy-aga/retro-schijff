@@ -21,6 +21,7 @@ export default function ShooterPage() {
   const [name, setName] = useState("");
   const [personalBest, setPersonalBest] = useState(0);
   const [wave, setWave] = useState(1);
+  const requestFrameRef = useRef<(() => void) | null>(null);
 
   const stateRef = useRef({
     player: { x: W / 2, y: H - 40, w: 32, h: 24, cooldown: 0, rapid: 0, spread: 0, shield: 0 },
@@ -98,6 +99,7 @@ export default function ShooterPage() {
     st.keysJustPressed = {};
     spawnWave(st);
     setScore(0); setLives(3); setWave(1); setGameOver(false); setRunning(true);
+    requestFrameRef.current?.();
   };
 
   useEffect(() => {
@@ -114,6 +116,18 @@ export default function ShooterPage() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
     let raf: number;
+    let disposed = false;
+    let framePending = false;
+
+    const scheduleFrame = () => {
+      if (disposed || framePending) return;
+      framePending = true;
+      raf = requestAnimationFrame(() => {
+        framePending = false;
+        loop();
+      });
+    };
+    requestFrameRef.current = scheduleFrame;
 
     const handleKey = (e: KeyboardEvent, down: boolean) => {
       if (down) {
@@ -356,10 +370,12 @@ export default function ShooterPage() {
         ctx.textAlign = "left";
       }
 
-      raf = requestAnimationFrame(loop);
+      scheduleFrame();
     };
 
-    const startLoop = () => { raf = requestAnimationFrame(loop); };
+    const startLoop = () => {
+      scheduleFrame();
+    };
     if (typeof document !== "undefined" && document.fonts) {
       document.fonts.ready.then(startLoop);
     } else {
@@ -367,6 +383,8 @@ export default function ShooterPage() {
     }
 
     return () => {
+      disposed = true;
+      requestFrameRef.current = null;
       cancelAnimationFrame(raf);
       window.removeEventListener("keydown", kd);
       window.removeEventListener("keyup", ku);

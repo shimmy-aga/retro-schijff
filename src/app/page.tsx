@@ -109,7 +109,7 @@ export default function Home() {
             <div className="space-y-2">
               {scores.map((s, i) => (
                 <div key={s.id} className="flex justify-between items-center p-2 border-2 border-border ">
-                  <span className="text-sm"><b>#{i+1}</b> {s.playerName} <span className="text-xs opacity-60">({s.game === "evolution" ? "Evolutie" : "Deadlift"})</span></span>
+                  <span className="text-sm"><b>#{i+1}</b> {s.playerName} <span className="text-xs opacity-60">({s.game === "evolution" ? "Evolutie" : s.game === "shooter" ? "Defenders" : "Deadlift"})</span></span>
                   <span className="font-retro text-xs text-foreground">{s.score}</span>
                 </div>
               ))}
