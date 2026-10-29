@@ -31,7 +31,7 @@ export default function SpelPage() {
   const speed = useRef(1.2);
 
   const loadBest = useCallback(() => {
-    api.getScores().then((s) => setBest(s.sort((a, b) => b.score - a.score).slice(0, 10)));
+    api.getScores().then((s) => setBest(s.filter((x) => x.game === "deadlift").sort((a, b) => b.score - a.score).slice(0, 10)));
   }, []);
   useEffect(() => { loadBest(); const t = setInterval(loadBest, 10000); return () => clearInterval(t); }, [loadBest]);
 

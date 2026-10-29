@@ -108,9 +108,12 @@ export default function Home() {
             <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-2 text-foreground"><Trophy className="text-foreground" size={24} /> Minigame Scoreboard</h2>
             <div className="space-y-2">
               {scores.map((s, i) => (
-                <div key={s.id} className="flex justify-between items-center p-2 border-2 border-border ">
-                  <span className="text-sm"><b>#{i+1}</b> {s.playerName} <span className="text-xs opacity-60">({s.game === "evolution" ? "Evolutie" : s.game === "shooter" ? "Defenders" : "Deadlift"})</span></span>
-                  <span className="font-retro text-xs text-foreground">{s.score}</span>
+                <div key={s.id} className={`flex justify-between items-center p-3 border-2 border-border ${i === 0 ? "bg-accent2/30" : ""}`}>
+                  <span className="font-retro text-xs">
+                    <span className="gradient-text">{i === 0 ? "#1" : i === 1 ? "#2" : i === 2 ? "#3" : `#${i + 1}`}</span> {s.playerName}
+                    <span className="block mt-1 text-[10px] opacity-60">{s.game === "evolution" ? "Evolutie" : s.game === "shooter" ? "Defenders" : "Deadlift"}</span>
+                  </span>
+                  <b className="font-retro text-xs gradient-text">{s.score}</b>
                 </div>
               ))}
               {scores.length === 0 && <p className="text-sm opacity-60 text-left">Nog geen scores.</p>}

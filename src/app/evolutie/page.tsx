@@ -45,7 +45,7 @@ export default function EvolutiePage() {
   const scoreRef = useRef(0);
 
   const loadBest = useCallback(() => {
-    api.getScores().then((s) => setBest(s.sort((a, b) => b.score - a.score).slice(0, 10)));
+    api.getScores().then((s) => setBest(s.filter((x) => x.game === "evolution").sort((a, b) => b.score - a.score).slice(0, 10)));
   }, []);
   useEffect(() => { loadBest(); }, []);
 
